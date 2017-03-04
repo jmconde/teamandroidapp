@@ -1,5 +1,6 @@
 package co.xintana.unionmagdalenafanapp.activities;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -7,13 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.Toast;
 
 import co.xintana.unionmagdalenafanapp.MainPageAdapter;
 import co.xintana.unionmagdalenafanapp.R;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String TAG = MainActivity.class.getSimpleName();
-
+public class MainActivity extends UMAppCompatActivity {
     private ViewPager mPager;
     private MainPageAdapter mPageAdapter;
 
@@ -39,9 +39,9 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Log.d(TAG, "" + tab.getPosition());
+                Log.d(getTag(), "" + tab.getPosition());
                 mPager.setCurrentItem(tab.getPosition());
-                Log.d(TAG, "After");
+                Log.d(getTag(), "After");
             }
 
             @Override
@@ -54,6 +54,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        Intent intent = getIntent();
+        if (!intent.hasExtra(Intent.EXTRA_TEXT)) {
+            Toast.makeText(this, "No se cargaron datos correctamente.", Toast.LENGTH_LONG).show();
+        }
 
     }
 }
