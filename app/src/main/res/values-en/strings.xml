@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Union Magdalena Fan App</string>
+    <string name="action_settings">Settings</string>
+    <string name="forma_reciente_label">Recent Form</string>
+    <string name="jornada">Round</string>
+    <string name="local">H</string>
+    <string name="proximo">Next Match</string>
+    <string name="visitante">V</string>
+</resources>

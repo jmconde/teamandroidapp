@@ -5,6 +5,11 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import co.xintana.unionmagdalenafanapp.R;
 import co.xintana.unionmagdalenafanapp.data.ActualidadInfo;
 
@@ -267,5 +272,30 @@ public class DataUtilities {
                 throw new UnsupportedOperationException("Codigo de equipo no encotnrado");
         }
 
+    }
+
+    public static Date parseFecha(String fecha){
+        SimpleDateFormat df = new SimpleDateFormat("EEE MMM dd yyyy kk:mm:ss z", Locale.ENGLISH);
+        try {
+            return df.parse(fecha);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String getDiaMes(Date date) {
+        SimpleDateFormat fechaSDF = new SimpleDateFormat("d MMM", Locale.getDefault());
+        return fechaSDF.format(date);
+    }
+
+    public static String getHora(Date date) {
+        SimpleDateFormat horaSDF = new SimpleDateFormat("h:mm a", Locale.getDefault());
+        return horaSDF.format(date);
+    }
+
+    public static String getDiaSemana(Date date) {
+        SimpleDateFormat diaSDF = new SimpleDateFormat("EEEE", Locale.getDefault());
+        return diaSDF.format(date);
     }
 }

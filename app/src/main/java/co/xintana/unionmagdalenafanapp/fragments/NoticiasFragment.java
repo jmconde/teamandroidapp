@@ -31,44 +31,26 @@ public class NoticiasFragment extends UMAppFragment {
         Context context = getContext();
         Log.d(getLogTag(), info.fecha);
 
-        SimpleDateFormat df = new SimpleDateFormat("EEE MMM dd yyyy kk:mm:ss z", Locale.ENGLISH);
-        SimpleDateFormat fechaSDF = new SimpleDateFormat("d MMM", Locale.getDefault());
-        SimpleDateFormat diaSDF = new SimpleDateFormat("EEEE", Locale.getDefault());
-        SimpleDateFormat horaSDF = new SimpleDateFormat("h:mm a", Locale.getDefault());
-
-        String diaMes = "";
-        String diaSemana = "";
-        String hora = "";
-        try {
-            Date fecha = df.parse(info.fecha);
-            diaMes = fechaSDF.format(fecha);
-            diaSemana = diaSDF.format(fecha);
-            hora = horaSDF.format(fecha);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            Log.e(getLogTag(), "fecha", e);
+        Date fecha = DataUtilities.parseFecha(info.fecha);
+        if (fecha != null) {
+            String diaMes = DataUtilities.getDiaMes(fecha);
+            String diaSemana = DataUtilities.getDiaSemana(fecha);
+            String hora = DataUtilities.getHora(fecha);
+            binding.tvFechaProximo.setText(diaMes);
+            binding.tvDiaProximo.setText(diaSemana);
+            binding.tvHoraProximo.setText(hora);
         }
 
         int idEstadioEquipo = info.local ? 33 : info.equipo;
 
         binding.tvTorneoProximo.setText(info.torneo + ", " + context.getString(R.string.jornada) + " " + String.valueOf(info.jornada));
         binding.tvLocalFlagProximo.setText((info.local) ? context.getString(R.string.local) : context.getString(R.string.visitante));
-        binding.tvFechaProximo.setText(diaMes);
-        binding.tvDiaProximo.setText(diaSemana);
-        binding.tvHoraProximo.setText(hora);
+
         binding.tvEquipoProximo.setText(DataUtilities.getEquipoNombre(info.equipo));
         binding.ivIconProximo.setBackgroundResource(DataUtilities.getEquipoIcon(info.equipo));
 
         binding.tvProximoEstadio.setText(DataUtilities.getEstadio(idEstadioEquipo));
         Log.d(getLogTag(), ">>>" +info.estadio );
-
-
-//            public String torneo;
-//            public int jornada;
-//            public String fecha;
-//            public boolean local;
-//            public String estadio;
-//            public String equipo;
 
         return binding.getRoot();
     }
