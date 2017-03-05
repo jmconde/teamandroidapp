@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
  */
 
 public class UMAppCompatActivity extends AppCompatActivity {
-    protected String getTag() {
+    protected String getLogTag() {
         return "UMAPP " + this.getClass().getSimpleName();
     }
 }

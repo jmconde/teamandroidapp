@@ -1,0 +1,112 @@
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="co.xintana.unionmagdalenafanapp.fragments.ProximoPartidoFragment">
+
+    <TextView
+        android:id="@+id/tv_torneo_proximo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_proximo_label"
+        tools:text="Torneo Águila 2017 - I, Fecha 4 " />
+
+    <TextView
+        android:id="@+id/tv_fecha_proximo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="7dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_torneo_proximo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_torneo_proximo"
+        tools:text="25 Oct" />
+
+    <TextView
+        android:id="@+id/tv_dia_proximo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textSize="10sp"
+        android:textStyle="italic"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_fecha_proximo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_fecha_proximo"
+        tools:text="Miércoles" />
+
+    <TextView
+        android:id="@+id/tv_local_flag_proximo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="0dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_fecha_proximo"
+        app:layout_constraintLeft_toRightOf="@+id/tv_fecha_proximo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_dia_proximo"
+        tools:text="V" />
+
+    <ImageView
+        android:id="@+id/iv_icon_proximo"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="0dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toTopOf="@+id/tv_local_flag_proximo"
+        app:layout_constraintLeft_toRightOf="@+id/tv_local_flag_proximo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_local_flag_proximo"
+        tools:background="@drawable/ic_valledupar"/>
+
+    <TextView
+        android:id="@+id/tv_equipo_proximo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="0dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textSize="14sp"
+        app:layout_constraintLeft_toRightOf="@+id/iv_icon_proximo"
+        app:layout_constraintTop_toTopOf="@+id/tv_fecha_proximo"
+        tools:text="Valledupar F.C." />
+
+    <TextView
+        android:id="@+id/tv_proximo_estadio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textSize="10sp"
+        android:textStyle="italic"
+        app:layout_constraintLeft_toLeftOf="@+id/tv_equipo_proximo"
+        app:layout_constraintTop_toBottomOf="@+id/tv_equipo_proximo"
+        tools:text="Armando Maestre Pavajeau" />
+
+    <TextView
+        android:id="@+id/tv_hora_proximo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="7dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:textSize="18sp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:text="8:45 pm"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_proximo_estadio"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_equipo_proximo" />
+
+</android.support.constraint.ConstraintLayout>

@@ -1,18 +1,14 @@
 package co.xintana.unionmagdalenafanapp.activities;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import java.io.IOException;
 import java.net.URL;
 
-import co.xintana.unionmagdalenafanapp.R;
-import co.xintana.unionmagdalenafanapp.activities.MainActivity;
 import co.xintana.unionmagdalenafanapp.utilities.NetworkUtilities;
 
 /**
@@ -24,7 +20,7 @@ public class SplashActivity extends UMAppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // setContentView(R.layout.activity_splash);
-        Log.d(getTag(), "=====================================Initializing");
+        Log.d(getLogTag(), "=====================================Initializing");
         new LoadDataTask().execute(NetworkUtilities.buildURL());
     }
 
@@ -49,7 +45,7 @@ public class SplashActivity extends UMAppCompatActivity {
 
             if (json != null && !json.equals("")) {
                 intent.putExtra(Intent.EXTRA_TEXT, json);
-                Log.d(getTag(), "json: "+json);
+                Log.d(getLogTag(), "json: "+json);
             }
             startActivity(intent);
             finish();

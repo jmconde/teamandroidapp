@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class NetworkUtilities {
     private static final String TAG = "UMAPP " + NetworkUtilities.class.getSimpleName();
 
-    private static final String BASE_URL = "http://192.168.0.66:8080/actualidad";
+    private static final String BASE_URL = "http://xintana.co:5501/actualidad";
 
     public static URL buildURL() {
         Uri uri = Uri.parse(BASE_URL).buildUpon().build();

@@ -4,18 +4,23 @@ import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import co.xintana.unionmagdalenafanapp.MainPageAdapter;
 import co.xintana.unionmagdalenafanapp.R;
+import co.xintana.unionmagdalenafanapp.data.ActualidadInfo;
+import co.xintana.unionmagdalenafanapp.utilities.DataUtilities;
 
 public class MainActivity extends UMAppCompatActivity {
     private ViewPager mPager;
     private MainPageAdapter mPageAdapter;
+    public ActualidadInfo mActualidadInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +30,7 @@ public class MainActivity extends UMAppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
+        final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Actualidad"));
         tabLayout.addTab(tabLayout.newTab().setText("Historia"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
@@ -39,9 +44,9 @@ public class MainActivity extends UMAppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                Log.d(getTag(), "" + tab.getPosition());
+                Log.d(getLogTag(), "" + tab.getPosition());
                 mPager.setCurrentItem(tab.getPosition());
-                Log.d(getTag(), "After");
+                Log.d(getLogTag(), "After");
             }
 
             @Override
@@ -58,6 +63,15 @@ public class MainActivity extends UMAppCompatActivity {
         Intent intent = getIntent();
         if (!intent.hasExtra(Intent.EXTRA_TEXT)) {
             Toast.makeText(this, "No se cargaron datos correctamente.", Toast.LENGTH_LONG).show();
+        } else {
+            JSONObject json = null;
+            try {
+                json = new JSONObject(intent.getStringExtra(Intent.EXTRA_TEXT));
+                mActualidadInfo = DataUtilities.populate(json);
+                Log.d(getLogTag(), mActualidadInfo.toString());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
     }
