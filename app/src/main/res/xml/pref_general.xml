@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <CheckBoxPreference
+        android:defaultValue="@bool/pref_notificaciones_defautl"
+        android:key="@string/pref_notificaciones_key"
+        android:summaryOff="@string/pref_notificaciones_summary_off"
+        android:summaryOn="@string/pref_notificaciones_summary_on"
+        android:title="@string/pref_notificaciones_label" />
+</PreferenceScreen>

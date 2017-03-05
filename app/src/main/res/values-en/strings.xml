@@ -7,4 +7,9 @@
     <string name="local">H</string>
     <string name="proximo">Next Match</string>
     <string name="visitante">V</string>
+    <string name="tab_actualidad">Info</string>
+    <string name="tab_historia">History</string>
+    <string name="pref_notificaciones_label">Activate Notifications</string>
+    <string name="pref_notificaciones_summary_on">Active</string>
+    <string name="pref_notificaciones_summary_off">Inactive</string>
 </resources>
