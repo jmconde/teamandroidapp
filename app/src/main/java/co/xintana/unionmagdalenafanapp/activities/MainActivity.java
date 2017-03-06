@@ -1,6 +1,7 @@
 package co.xintana.unionmagdalenafanapp.activities;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -18,11 +19,13 @@ import org.json.JSONObject;
 import co.xintana.unionmagdalenafanapp.MainPageAdapter;
 import co.xintana.unionmagdalenafanapp.R;
 import co.xintana.unionmagdalenafanapp.data.ActualidadInfo;
+import co.xintana.unionmagdalenafanapp.data.UMAppDbHelper;
 import co.xintana.unionmagdalenafanapp.utilities.DataUtilities;
 
 public class MainActivity extends UMAppCompatActivity {
     private ViewPager mPager;
     private MainPageAdapter mPageAdapter;
+    private SQLiteDatabase mDb;
     public ActualidadInfo mActualidadInfo;
 
     @Override
@@ -64,6 +67,7 @@ public class MainActivity extends UMAppCompatActivity {
         });
 
         Intent intent = getIntent();
+        UMAppDbHelper dbHelper = new UMAppDbHelper(this);
         if (!intent.hasExtra(Intent.EXTRA_TEXT)) {
             Toast.makeText(this, "No se cargaron datos correctamente.", Toast.LENGTH_LONG).show();
         } else {
