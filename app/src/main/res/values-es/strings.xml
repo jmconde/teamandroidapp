@@ -13,4 +13,9 @@
     <string name="pref_notificaciones_label">Activar Notificaciones</string>
     <string name="pref_notificaciones_summary_on">Activas</string>
     <string name="pref_notificaciones_summary_off">Inactivas</string>
+    <string name="lbl_ultimo">Último Partido</string>
+    <string name="lab_tabla">Tabla de Posiciones</string>
+    <string name="victoria">V</string>
+    <string name="empate">E</string>
+    <string name="derrota">D</string>
 </resources>

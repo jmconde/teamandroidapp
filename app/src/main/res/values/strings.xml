@@ -15,4 +15,9 @@
     <string name="pref_notificaciones_summary_on">Active</string>
     <string name="pref_notificaciones_summary_off">Inactive</string>
     <string name="pref_notificaciones_key" translatable="false">pref_notificaciones_id</string>
+    <string name="lbl_ultimo">Last Match</string>
+    <string name="lab_tabla">Standings</string>
+    <string name="victoria">W</string>
+    <string name="derrota">L</string>
+    <string name="empate">D</string>
 </resources>

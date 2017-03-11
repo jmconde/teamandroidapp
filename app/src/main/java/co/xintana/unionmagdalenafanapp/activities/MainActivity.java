@@ -20,6 +20,7 @@ import co.xintana.unionmagdalenafanapp.MainPageAdapter;
 import co.xintana.unionmagdalenafanapp.R;
 import co.xintana.unionmagdalenafanapp.data.ActualidadInfo;
 import co.xintana.unionmagdalenafanapp.data.UMAppDbHelper;
+import co.xintana.unionmagdalenafanapp.data.entities.Partido;
 import co.xintana.unionmagdalenafanapp.utilities.DataUtilities;
 
 public class MainActivity extends UMAppCompatActivity {
@@ -73,6 +74,7 @@ public class MainActivity extends UMAppCompatActivity {
         } else {
             JSONObject json = null;
             try {
+                Log.d(getLogTag(), intent.getStringExtra(Intent.EXTRA_TEXT));
                 json = new JSONObject(intent.getStringExtra(Intent.EXTRA_TEXT));
                 mActualidadInfo = DataUtilities.populate(json);
                 Log.d(getLogTag(), mActualidadInfo.toString());

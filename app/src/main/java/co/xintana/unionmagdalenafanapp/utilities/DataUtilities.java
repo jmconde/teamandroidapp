@@ -12,26 +12,36 @@ import java.util.Locale;
 
 import co.xintana.unionmagdalenafanapp.R;
 import co.xintana.unionmagdalenafanapp.data.ActualidadInfo;
+import co.xintana.unionmagdalenafanapp.data.entities.Equipo;
+import co.xintana.unionmagdalenafanapp.data.entities.Estadio;
+import co.xintana.unionmagdalenafanapp.data.entities.Partido;
 
 /**
  * Created by jmcon on 3/4/2017.
  */
 
 public class DataUtilities {
+    public static final int ID_EQUIPO_PRINCIPAL = 33;
+
     public static ActualidadInfo populate(JSONObject json) {
         ActualidadInfo actualidadInfo = new ActualidadInfo();
         try {
-            JSONObject siguiente = json.getJSONObject("siguiente");
-            actualidadInfo.torneo = siguiente.getString("torneo");
-            actualidadInfo.jornada = siguiente.getInt("jornada");
-            actualidadInfo.fecha = siguiente.getString("fecha");
-            actualidadInfo.local = siguiente.getBoolean("local");
-            actualidadInfo.estadio = siguiente.getString("estadio");
-            actualidadInfo.equipo = siguiente.getInt("equipoId");
+            actualidadInfo.setUltimo(Partido.parse(json.getJSONObject("ultimo")));
+            actualidadInfo.setSiguiente(Partido.parse(json.getJSONObject("siguiente")));
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return actualidadInfo;
+    }
+    public static Equipo getEquipo(int id) {
+        return new Equipo(id,
+                getEquipoNombre(id),
+                id,
+                getEquipoIcon(id));
+    }
+
+    public static Estadio getEstadio(int id) {
+        return new Estadio(id, DataUtilities.getNombreEstadio(id));
     }
 
     public static int getEquipoIcon(int id) {
@@ -115,6 +125,10 @@ public class DataUtilities {
 
     }
 
+    public static Boolean esLocal(Partido partido) {
+        return partido.getLocal().getId() == ID_EQUIPO_PRINCIPAL;
+    }
+
     public static String getEquipoNombre(int id) {
         switch (id) {
             case 0:
@@ -194,7 +208,7 @@ public class DataUtilities {
         }
     }
 
-    public static String getEstadio(int id) {
+    public static String getNombreEstadio(int id) {
         switch (id){
             case 0:
                 return "Alberto Grisales";
@@ -289,8 +303,18 @@ public class DataUtilities {
         return fechaSDF.format(date);
     }
 
+    public static String getDia(Date date) {
+        SimpleDateFormat fechaSDF = new SimpleDateFormat("d", Locale.getDefault());
+        return fechaSDF.format(date);
+    }
+
+    public static String getMes(Date date) {
+        SimpleDateFormat fechaSDF = new SimpleDateFormat("MMM", Locale.getDefault());
+        return fechaSDF.format(date);
+    }
+
     public static String getHora(Date date) {
-        SimpleDateFormat horaSDF = new SimpleDateFormat("h:mm a", Locale.getDefault());
+        SimpleDateFormat horaSDF = new SimpleDateFormat("h:mma", Locale.getDefault());
         return horaSDF.format(date);
     }
 

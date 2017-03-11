@@ -18,6 +18,7 @@ import java.util.Locale;
 import co.xintana.unionmagdalenafanapp.R;
 import co.xintana.unionmagdalenafanapp.activities.MainActivity;
 import co.xintana.unionmagdalenafanapp.data.ActualidadInfo;
+import co.xintana.unionmagdalenafanapp.data.entities.Partido;
 import co.xintana.unionmagdalenafanapp.databinding.FragmentActualidadBinding;
 import co.xintana.unionmagdalenafanapp.utilities.DataUtilities;
 
@@ -29,28 +30,36 @@ public class NoticiasFragment extends UMAppFragment {
         ActualidadInfo info = ((MainActivity)getActivity()).mActualidadInfo;
         FragmentActualidadBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_actualidad, container, false);
         Context context = getContext();
-        Log.d(getLogTag(), info.fecha);
 
-        Date fecha = DataUtilities.parseFecha(info.fecha);
+        // Proximo Partido
+        Partido siguiente = info.getSiguiente();
+        boolean esLocal = DataUtilities.esLocal(siguiente);
+        Date fecha = siguiente.getFecha();
         if (fecha != null) {
-            String diaMes = DataUtilities.getDiaMes(fecha);
-            String diaSemana = DataUtilities.getDiaSemana(fecha);
-            String hora = DataUtilities.getHora(fecha);
-            binding.tvFechaProximo.setText(diaMes);
-            binding.tvDiaProximo.setText(diaSemana);
-            binding.tvHoraProximo.setText(hora);
+            binding.tvMesProximo.setText(DataUtilities.getMes(fecha));
+            binding.tvDiaProximo.setText(DataUtilities.getDia(fecha));
+            binding.tvHoraProximo.setText(DataUtilities.getHora(fecha));
         }
+        binding.tvTorneoProximo.setText(siguiente.getTorneo() + ", " + context.getString(R.string.jornada) + " " + String.valueOf(siguiente.getJornada()));
+        binding.tvEquipoProximo.setText( esLocal ? siguiente.getVisitante().getNombre() : siguiente.getLocal().getNombre());
+        binding.ivIconProximo.setBackgroundResource(esLocal ? siguiente.getVisitante().getIcon() : siguiente.getLocal().getIcon());
+        binding.tvProximoEstadio.setText(siguiente.getEstadio().getNombre());
 
-        int idEstadioEquipo = info.local ? 33 : info.equipo;
+        // Ultimo Partido
+        Partido ultimo = info.getUltimo();
+        fecha = ultimo.getFecha();
 
-        binding.tvTorneoProximo.setText(info.torneo + ", " + context.getString(R.string.jornada) + " " + String.valueOf(info.jornada));
-        binding.tvLocalFlagProximo.setText((info.local) ? context.getString(R.string.local) : context.getString(R.string.visitante));
-
-        binding.tvEquipoProximo.setText(DataUtilities.getEquipoNombre(info.equipo));
-        binding.ivIconProximo.setBackgroundResource(DataUtilities.getEquipoIcon(info.equipo));
-
-        binding.tvProximoEstadio.setText(DataUtilities.getEstadio(idEstadioEquipo));
-        Log.d(getLogTag(), ">>>" +info.estadio );
+        if (fecha != null) {
+            binding.tvMesUltimo.setText(DataUtilities.getMes(fecha));
+            binding.tvDiaUltimo.setText(DataUtilities.getDia(fecha));
+        }
+        binding.tvEquipoLocalUltimo.setText(ultimo.getLocal().getNombre());
+        String marcadorLocal = String.valueOf(ultimo.getMarcador()[0]);
+        binding.tvEquipoVisitaUltimo.setText(ultimo.getVisitante().getNombre());
+        String marcadorVisita = String.valueOf(ultimo.getMarcador()[1]);
+        binding.tvGolesLocalUltimo.setText(marcadorLocal);
+        binding.tvGolesVisitaUltimo.setText(marcadorVisita);
+        binding.tvTorneoUltimo.setText(ultimo.getTorneo() + ", " + context.getString(R.string.jornada) + " " + String.valueOf(ultimo.getJornada()));
 
         return binding.getRoot();
     }
